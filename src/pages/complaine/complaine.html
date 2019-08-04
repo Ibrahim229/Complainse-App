@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-navbar color="primary">
+
+    <ion-title>Complaince form</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="forms-validations-content ion-text-center">
+  <form class="valiaations-form" [formGroup]="createIssueForm" (ngSubmit)="onSubmit(createIssueForm.value)">
+    <ion-list class="inputs-list" lines="full">
+        <br>
+      <p align="center">
+        <ion-label style="color: #31715b">Basic Data</ion-label>
+      </p>
+      <ion-item class="input-item">
+        <ion-label position="floating">Title</ion-label>
+        <ion-input type="text" formControlName="title" clearInput required></ion-input>
+      </ion-item>
+      <br>
+      <div style="margin-left: 10px" class="error-container">
+        <ng-container *ngFor="let validation of validations.title">
+          <div class="error-message"
+            *ngIf="createIssueForm.get('title').hasError(validation.type) && (createIssueForm.get('title').dirty || createIssueForm.get('title').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span style="color:#f53d3d ">{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+      <br>
+      <ion-item class="input-item">
+        <ion-label position="floating">Summary</ion-label>
+        <ion-textarea type="text" formControlName="summary" clearInput></ion-textarea>
+      </ion-item>
+      <br>
+      <div style="margin-left: 10px" class="error-container">
+        <ng-container *ngFor="let validation of validations.summary">
+          <div class="error-message"
+            *ngIf="createIssueForm.get('summary').hasError(validation.type) && (createIssueForm.get('summary').dirty || createIssueForm.get('summary').touched)">
+            <ion-icon name="information-circle-outline"></ion-icon>
+            <span style="color:#f53d3d ">{{ validation.message }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+    </ion-list>
+    <ion-list class="inputs-list" lines="full" *ngIf="violationCustomFields != undefined">
+      <p align="center">
+        <ion-label style="color: #31715b">Custom Data</ion-label>
+      </p>
+      <br>
+      <div *ngFor="let item of violationCustomFields">
+        <ion-item class="input-item">
+          <ion-label position="floating">{{item.FIELD_LABEL_EN}}</ion-label>
+          <ion-input *ngIf="item.FIELD_TYPE == 781" type="text" formControlName="{{item.FIELD_NAME}}" clearInput
+            required></ion-input>
+          <ion-input *ngIf="item.FIELD_TYPE == 784" type="number" formControlName="{{item.FIELD_NAME}}" clearInput
+            required></ion-input>
+          <ion-datetime *ngIf="item.FIELD_TYPE == 782" formControlName="{{item.FIELD_NAME}}"
+            display-format="MMM DD, YYYY"></ion-datetime>
+        </ion-item>
+        <br>
+        <div style="margin-left: 10px" class="error-container">
+          <ng-container *ngFor="let validation of validations[item.FIELD_NAME]">
+            <div class="error-message"
+              *ngIf="createIssueForm.get(item.FIELD_NAME).hasError(validation.type) && (createIssueForm.get(item.FIELD_NAME).dirty || createIssueForm.get(item.FIELD_NAME).touched)">
+              <ion-icon name="information-circle-outline"></ion-icon>
+              <span style="color:#f53d3d ">{{ validation.message }}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ion-list>
+    <ion-row justify-content-center align-items-center>
+      <button color="dark" outline ion-button round tappable type="button" (click)="gitPhoto()">Add photo </button>
+    </ion-row>
+    <p align="center"><img [hidden]="photo==undefined" [src]="DomSanitizer.bypassSecurityTrustUrl(photo)"></p>
+    <ion-row justify-content-center align-items-center>
+      <button color="dark" ion-button round class="submit-btn" type="submit" expand="block" fill="outline"
+        [disabled]="!createIssueForm.valid">
+        Submit</button>
+    </ion-row>
+    <br>
+
+  </form>
+</ion-content>

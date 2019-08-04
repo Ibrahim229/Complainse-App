@@ -1,0 +1,20 @@
+#map {
+    height: 100%;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  ion-loading.transparent {
+    .loading-wrapper {
+      background: transparent;
+      box-shadow: none;
+  
+      .spinner-crescent circle {
+        stroke-width: 8px;
+      }
+    }
+  }

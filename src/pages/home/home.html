@@ -1,0 +1,61 @@
+<!-- -->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      compliance information
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn common-bg">
+
+
+  <ion-title> Assets</ion-title>
+  <ion-item>
+    <ion-label>{{ASSET_NAME}}</ion-label>
+  </ion-item>
+
+
+
+  <!-- <div hidden]="!(showasset3)">Content to render when condition is false.</div> -->
+  <br>
+  <ion-title> Select Vioaltion Type</ion-title>
+  <br>
+  <ion-item>
+    <ion-label>Vioaltion Type</ion-label>
+    <ion-select *ngIf="ViolationTypes.length>0;else elseBlock" [(ngModel)]="selected_value3"
+      (ionChange)="ViolationType(selected_value3)">
+      <ion-option *ngFor="let ViolationType of ViolationTypes" [value]="ViolationType.VIOLATION_GROUP_ID" ion-option>
+        {{ViolationType.TITLE_AR}}</ion-option>
+    </ion-select>
+    <ng-template style="color: red" #elseBlock> No types available</ng-template>
+  </ion-item>
+  <br>
+  <div class="animated fadeInDown" [hidden]="showasset2">
+    <ion-title> Select Violation </ion-title>
+    <br>
+    <ion-item>
+      <ion-label>Violations</ion-label>
+      <ion-select *ngIf="Violations.length>0;else elseBlock" [(ngModel)]="selected_value4"
+        (ionChange)="Violation(selected_value4)">
+        <ion-option *ngFor="let Violation of Violations" [value]="Violation.VIOLATION_ID" value="foo">
+          {{Violation.TITLE_AR}}</ion-option>
+      </ion-select>
+      <ng-template #elseBlock>
+        <p style="color: red;font-size: medium">No violations available</p>
+      </ng-template>
+    </ion-item>
+  </div>
+
+
+  <ion-grid>
+    <ion-row justify-content-center align-items-center style="height: 100%; flex-direction: column">
+      <button [disabled]="!(VIOLATION_GROUP_ID!=null&&CLASSIFICATION_ID!=null&& violation!=null)" color="dark"
+        (click)="compliance()" ion-button round>Add compliance </button>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

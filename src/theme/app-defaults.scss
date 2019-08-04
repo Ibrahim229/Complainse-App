@@ -1,0 +1,9 @@
+ion-title {
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+.page-content{
+  // background-color: map-get($colors, light) !important;
+  --background: center / cover no-repeat url('./assets/images/bg-new.jpg') !important;
+  // --background-size: cover;
+}

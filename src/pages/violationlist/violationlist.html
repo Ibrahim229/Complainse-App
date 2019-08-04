@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>
+      Violation List
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <!-- <ion-grid>
+    <ion-card style="height:100px;width:320px;background-color:#d3c5a0" *ngFor="let item of issuesList" >
+
+      <ion-card-header>
+        {{item.ISSUE_TITLE}}
+      </ion-card-header>
+
+      <ion-card-content>
+        {{item.ISSUE_SUMMARY}}
+      </ion-card-content>
+
+    </ion-card>
+  </ion-grid> -->
+  <ion-card style="background-color:#f3ebd6" *ngFor="let item of issuesList">
+    <ion-card-header>
+      <ion-card-title>{{item.ISSUE_TITLE}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{item.ISSUE_SUMMARY}}
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
